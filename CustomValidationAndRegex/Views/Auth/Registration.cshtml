@@ -1,0 +1,49 @@
+﻿@model CustomValidationAndRegex.Models.Auth
+@{
+    ViewBag.Title = "Registration";
+}
+
+<h2>Registration</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+@using (Html.BeginForm("Registration", "Auth", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Full Name" })
+        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Username, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Username, new { @class = "form-control", placeholder = "Username (no spaces)" })
+        @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Id, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Id, new { @class = "form-control", placeholder = "xx-xxxxx-x" })
+        @Html.ValidationMessageFor(m => m.Id, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Dob, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Dob, "{0:yyyy-MM-dd}", new { @type = "date", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Dob, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "xx-xxxxx-x@student.aiub.edu" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+}

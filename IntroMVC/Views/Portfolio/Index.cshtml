@@ -1,0 +1,26 @@
+﻿@model IntroMVC.Models.Bio
+@{
+    ViewBag.Title = "Home - " + Model.Name;
+}
+
+@Html.Partial("_Nav")
+
+<section id="introduction">
+    <h1>@Model.Name</h1>
+    <h2>@Model.Title</h2>
+    <hr />
+
+    <div class="summary">
+        <p>@Model.Summary</p>
+        <p><strong>Skills:</strong> @string.Join(", ", Model.Skills)</p>
+    </div>
+
+    <div class="contact-info">
+        <h3>Contact Me</h3>
+        <p>
+            <strong>Email:</strong> <a href="mailto:@Model.Email">@Model.Email</a><br />
+            <strong>Phone:</strong> @Model.Phone<br />
+            <strong>LinkedIn:</strong> <a href="@Model.LinkedIn" target="_blank">@Model.LinkedIn</a>
+        </p>
+    </div>
+</section>

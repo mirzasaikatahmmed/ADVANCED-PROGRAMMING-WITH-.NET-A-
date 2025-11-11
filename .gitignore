@@ -1,0 +1,35 @@
+# IDE
+.vs/
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build output
+bin/
+obj/
+[Bb]uild/
+[Ll]ogs/
+*.log
+
+# ASP.NET / tooling
+*.svclog
+*.dbmdl
+
+# Test results
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+*.coveragexml
+
+# Packages
+packages/
+*.nupkg
+project.lock.json
+
+# Misc
+_ReSharper*/
+*.resharper
+*.rsuser
+*.DotSettings.user

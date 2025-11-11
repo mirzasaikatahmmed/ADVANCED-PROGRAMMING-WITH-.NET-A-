@@ -1,0 +1,49 @@
+﻿@model CustomValidationAndRegex.Models.Auth
+@{
+    ViewBag.Title = "Registration";
+}
+
+<h2>Registration</h2>
+
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+@using (Html.BeginForm("Index", "Form", FormMethod.Post, new { @class = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div>
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Username)
+        @Html.TextBoxFor(m => m.Username, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Username)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Id)
+        @Html.TextBoxFor(m => m.Id, new { @class = "form-control", placeholder = "12-34567-1" })
+        @Html.ValidationMessageFor(m => m.Id)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Dob)
+        @Html.TextBoxFor(m => m.Dob, "{0:yyyy-MM-dd}", new { type = "date", @class = "form-control" })
+        @Html.ValidationMessageFor(m => m.Dob)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "12-34567-1@student.aiub.edu" })
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+}

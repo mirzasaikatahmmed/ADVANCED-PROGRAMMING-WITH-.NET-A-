@@ -1,0 +1,22 @@
+﻿@model IEnumerable<IntroMVC.Models.Education>
+@{
+    ViewBag.Title = "Education";
+}
+
+@Html.Partial("_Nav")
+
+<h2>Education</h2>
+
+@foreach (var e in Model)
+{
+    <div class="education-entry">
+        <h3>@e.Degree</h3>
+        <h4>Institution Name: @e.InstitutionName</h4>
+        <ul>
+            <li><strong>Group:</strong> @e.Group</li>
+            <li><strong>Passing Year:</strong> @e.PassingYear</li>
+            <li><strong>Result (GPA/Grade):</strong> @e.Result out of 5.00</li>
+            <li><strong>Board:</strong> @e.Board</li>
+        </ul>
+    </div>
+}</div>

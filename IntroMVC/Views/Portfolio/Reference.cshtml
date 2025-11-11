@@ -1,0 +1,22 @@
+﻿@model IEnumerable<IntroMVC.Models.Reference>
+@{
+    ViewBag.Title = "Reference";
+}
+
+@Html.Partial("_Nav")
+
+<h2>Professional Reference</h2>
+
+@foreach (var r in Model)
+{
+    <div class="reference-card">
+        <h3>@r.Name</h3>
+        <p>@r.Title</p>
+        <p>@r.Institution</p>
+        <hr />
+        <ul>
+            <li><strong>Email:</strong> <a href="mailto:@r.Email">@r.Email</a></li>
+            <li><strong>Relationship:</strong> @r.Relationship</li>
+        </ul>
+    </div>
+}
