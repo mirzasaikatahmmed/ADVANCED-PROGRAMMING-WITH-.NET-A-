@@ -1,0 +1,42 @@
+﻿@model ecom.EF.Product
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Product Details</h2>
+<table class="table table-bordered">
+    <tr>
+        <th>Product ID</th>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <th>Product Name</th>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <th>Product Price</th>
+        <td>@Model.Price</td>
+    </tr>
+    <tr>
+        <th>Product Quantity</th>
+        <td>@Model.Qty</td>
+    </tr>
+    <tr>
+        <th>Product Category</th>
+        <td>
+            @if (Model.Category != null)
+            {
+                @Model.Category.Name
+            }
+            else
+            {
+                <i>No Category</i>
+            }
+        </td>
+    </tr>
+</table>
+
+<a href="/Product/List" class="btn btn-secondary">Back to List</a>
+<a href="/Product/Update/@Model.Id" class="btn btn-warning">Update</a>
+
+

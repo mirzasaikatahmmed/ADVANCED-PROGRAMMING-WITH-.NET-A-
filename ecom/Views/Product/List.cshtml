@@ -1,0 +1,67 @@
+﻿@model IEnumerable<ecom.EF.Product>
+
+@{
+    ViewBag.Title = "Product List";
+}
+
+<h2>Product List</h2>
+
+@if (TempData["Msg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Msg"]
+    </div>
+}
+
+<form method="get" action="@Url.Action("List", "Product")">
+    <input type="text" name="search" class="form-control" placeholder="Search by product name" style="width:300px; display:inline-block;" />
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+<br />
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Category</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Price</td>
+                <td>@item.Qty</td>
+                <td>@item.Category.Name</td>
+
+                <td>
+                    <a href="/Product/Details/@item.Id" class="btn btn-info btn-sm">Details</a>
+                    <a href="/Product/Update/@item.Id" class="btn btn-warning btn-sm">Update</a>
+                    <a href="/Product/Delete/@item.Id" class="btn btn-danger btn-sm">Delete</a>
+                    @if (item.Qty < 10)
+                    {
+                        <form method="post" action="/Product/Restock" style="display:inline-block; margin-left:10px;">
+                            <input type="hidden" name="id" value="@item.Id" />
+
+                            <input type="number" name="amount" placeholder="Qty" min="1" class="form-control" style="width:80px; display:inline-block;" />
+                            <button type="submit" class="btn btn-success btn-sm">
+                                Restock
+                            </button>
+                        </form>
+                    }
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="/Product/Create" class="btn btn-success">Add New Product</a>

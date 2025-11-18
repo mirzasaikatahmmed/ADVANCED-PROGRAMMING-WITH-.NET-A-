@@ -1,0 +1,51 @@
+﻿@model ecom.EF.Product
+
+@{
+    ViewBag.Title = "Delete Product";
+}
+
+<h2>Delete Product</h2>
+
+<div class="alert alert-danger">
+    <strong>Are you sure you want to delete this product?</strong>
+</div>
+
+<table class="table table-bordered">
+    <tr>
+        <th>Product ID</th>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <th>Name</th>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <th>Price</th>
+        <td>@Model.Price</td>
+    </tr>
+    <tr>
+        <th>Quantity</th>
+        <td>@Model.Qty</td>
+    </tr>
+    <tr>
+        <th>Category</th>
+        <td>
+            @if (Model.Category != null)
+            {
+                @Model.Category.Name
+            }
+            else
+            {
+                <i>No Category</i>
+            }
+        </td>
+    </tr>
+</table>
+
+@using (Html.BeginForm("ConfirmDelete", "Product", FormMethod.Post))
+{
+    @Html.HiddenFor(m => m.Id)
+
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="/Product/List" class="btn btn-secondary">Cancel</a>
+}
