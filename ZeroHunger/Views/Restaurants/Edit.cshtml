@@ -1,0 +1,44 @@
+﻿@model ZeroHunger.EF.Restaurant
+
+@{
+    ViewBag.Title = "Edit Restaurant";
+}
+
+<h2>Edit Restaurant</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="form-horizontal">
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Name)
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ContactPerson)
+            @Html.TextBoxFor(model => model.ContactPerson, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ContactPhone)
+            @Html.TextBoxFor(model => model.ContactPhone, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email)
+            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address)
+            @Html.TextAreaFor(model => model.Address, new { @class = "form-control", rows = 3 })
+        </div>
+
+        <button type="submit" class="btn btn-success">Update</button>
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+    </div>
+}

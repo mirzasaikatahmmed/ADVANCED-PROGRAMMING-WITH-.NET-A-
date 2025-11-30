@@ -1,0 +1,37 @@
+﻿@model ZeroHunger.EF.Restaurant
+
+@{
+    ViewBag.Title = "Delete Restaurant";
+}
+
+<h2>Delete Restaurant</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+
+<div>
+    <h4>@Model.Name</h4>
+    <hr />
+
+    <dl class="dl-horizontal">
+        <dt>Contact Person</dt>
+        <dd>@Model.ContactPerson</dd>
+
+        <dt>Phone</dt>
+        <dd>@Model.ContactPhone</dd>
+
+        <dt>Email</dt>
+        <dd>@Model.Email</dd>
+
+        <dt>Address</dt>
+        <dd>@Model.Address</dd>
+    </dl>
+
+    @using (Html.BeginForm("Delete", "Restaurants", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id)
+
+        <button type="submit" class="btn btn-danger">Delete</button>
+        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-secondary" })
+    }
+</div>
