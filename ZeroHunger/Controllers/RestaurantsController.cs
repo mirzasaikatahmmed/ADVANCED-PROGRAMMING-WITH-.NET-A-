@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ZeroHunger.EF;
+using ZeroHunger.Models;
 
 namespace ZeroHunger.Controllers
 {
@@ -15,24 +17,20 @@ namespace ZeroHunger.Controllers
 
         public ActionResult Index()
         {
-            var restaurants = db.Restaurants.ToList();
-
+            var restaurants = db.Restaurants
+                                .OrderByDescending(r => r.CreateAt)
+                                .ToList();
             return View(restaurants);
         }
 
         public ActionResult Details(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
             var restaurant = db.Restaurants.Find(id);
-
             if (restaurant == null)
-            {
                 return HttpNotFound();
-            }
 
             return View(restaurant);
         }
@@ -44,12 +42,11 @@ namespace ZeroHunger.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name,ContactPerson,ContactPhone,Address,Email")] Restaurant restaurant)
+        public ActionResult Create([Bind(Include = "Name,ContactPerson,ContactPhone,Address,Email")] EF.Restaurant restaurant)
         {
             if (ModelState.IsValid)
             {
                 restaurant.CreateAt = DateTime.UtcNow;
-
                 db.Restaurants.Add(restaurant);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -61,25 +58,27 @@ namespace ZeroHunger.Controllers
         public ActionResult Edit(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
             var restaurant = db.Restaurants.Find(id);
             if (restaurant == null)
-            {
                 return HttpNotFound();
-            }
 
             return View(restaurant);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,ContactPerson,ContactPhone,Address,Email,CreatedAt")] Restaurant restaurant)
+        public ActionResult Edit([Bind(Include = "Id,Name,ContactPerson,ContactPhone,Address,Email")] EF.Restaurant restaurant)
         {
             if (ModelState.IsValid)
             {
+                var existing = db.Restaurants.AsNoTracking().FirstOrDefault(r => r.Id == restaurant.Id);
+                if (existing == null)
+                    return HttpNotFound();
+
+                restaurant.CreateAt = existing.CreateAt;
+
                 db.Entry(restaurant).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -91,15 +90,11 @@ namespace ZeroHunger.Controllers
         public ActionResult Delete(int? id)
         {
             if (id == null)
-            {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
 
             var restaurant = db.Restaurants.Find(id);
             if (restaurant == null)
-            {
                 return HttpNotFound();
-            }
 
             return View(restaurant);
         }
@@ -110,9 +105,7 @@ namespace ZeroHunger.Controllers
         {
             var restaurant = db.Restaurants.Find(id);
             if (restaurant == null)
-            {
                 return HttpNotFound();
-            }
 
             db.Restaurants.Remove(restaurant);
             db.SaveChanges();

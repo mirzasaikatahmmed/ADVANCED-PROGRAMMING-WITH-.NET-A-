@@ -1,0 +1,50 @@
+﻿@model ZeroHunger.Models.CollectRequest
+
+@{
+    ViewBag.Title = "Collect Request Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Collect Request Details</h2>
+
+<div>
+    <h4>@Model.Title</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>Restaurant</dt>
+        <dd>@(Model.Restaurant != null ? Model.Restaurant.Name : "")</dd>
+
+        <dt>Title</dt>
+        <dd>@Html.DisplayFor(m => m.Title)</dd>
+
+        <dt>Description</dt>
+        <dd>@Html.DisplayFor(m => m.Description)</dd>
+
+        <dt>Status</dt>
+        <dd>@Html.DisplayFor(m => m.Status)</dd>
+
+        <dt>Estimated Quantity</dt>
+        <dd>@Html.DisplayFor(m => m.EstimatedQuantity)</dd>
+
+        <dt>Pickup Address</dt>
+        <dd>@Html.DisplayFor(m => m.PickupAddress)</dd>
+
+        <dt>Max Preserve Until</dt>
+        <dd>
+            @(Model.MaxPreserveUntil.HasValue
+                ? Model.MaxPreserveUntil.Value.ToLocalTime().ToString("f")
+                : "Not specified")
+        </dd>
+
+        <dt>Requested At</dt>
+        <dd>@Model.RequestedAt.ToLocalTime().ToString("f")</dd>
+
+        <dt>Created At</dt>
+        <dd>@Model.CreatedAt.ToLocalTime().ToString("f")</dd>
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+</p>

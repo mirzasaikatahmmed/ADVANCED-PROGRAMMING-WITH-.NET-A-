@@ -170,6 +170,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Assignment.cs" />
+    <Compile Include="Models\CollectRequest.cs" />
+    <Compile Include="Models\Distribution.cs" />
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\FoodItem.cs" />
+    <Compile Include="Models\Restaurant.cs" />
+    <Compile Include="Models\ZeroHungerContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -245,12 +252,15 @@
     <Content Include="Views\Restaurants\Create.cshtml" />
     <Content Include="Views\Restaurants\Edit.cshtml" />
     <Content Include="Views\Restaurants\Delete.cshtml" />
+    <Content Include="Views\CollectRequests\Index.cshtml" />
+    <Content Include="Views\CollectRequests\Details.cshtml" />
+    <Content Include="Views\CollectRequests\Create.cshtml" />
+    <Content Include="Views\CollectRequests\Edit.cshtml" />
+    <Content Include="Views\CollectRequests\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Assignments\" />
-    <Folder Include="Views\CollectRequests\" />
     <Folder Include="Views\Dashboard\" />
     <Folder Include="Views\Distributions\" />
     <Folder Include="Views\Employees\" />

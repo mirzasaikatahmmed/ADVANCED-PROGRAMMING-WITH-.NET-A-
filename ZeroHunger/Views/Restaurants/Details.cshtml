@@ -1,7 +1,8 @@
-﻿@model ZeroHunger.EF.Restaurant
+﻿@model ZeroHunger.Models.Restaurant
 
 @{
     ViewBag.Title = "Restaurant Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Restaurant Details</h2>
@@ -9,26 +10,28 @@
 <div>
     <h4>@Model.Name</h4>
     <hr />
-
     <dl class="dl-horizontal">
-        <dt>Contact Person</dt>
-        <dd>@Model.ContactPerson</dd>
+        <dt>Name</dt>
+        <dd>@Html.DisplayFor(model => model.Name)</dd>
 
-        <dt>Phone</dt>
-        <dd>@Model.ContactPhone</dd>
+        <dt>Contact Person</dt>
+        <dd>@Html.DisplayFor(model => model.ContactPerson)</dd>
+
+        <dt>Contact Phone</dt>
+        <dd>@Html.DisplayFor(model => model.ContactPhone)</dd>
 
         <dt>Email</dt>
-        <dd>@Model.Email</dd>
+        <dd>@Html.DisplayFor(model => model.Email)</dd>
 
         <dt>Address</dt>
-        <dd>@Model.Address</dd>
+        <dd>@Html.DisplayFor(model => model.Address)</dd>
 
         <dt>Created At</dt>
-        <dd>@Model.CreateAt</dd>
+        <dd>@Model.CreatedAt.ToLocalTime().ToString("f")</dd>
     </dl>
 </div>
 
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
 </p>
