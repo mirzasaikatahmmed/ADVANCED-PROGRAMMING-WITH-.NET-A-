@@ -1,0 +1,46 @@
+﻿@model IEnumerable<UMS.DTOs.DepartmentDTO>
+@{
+    ViewBag.Title = "Departments";
+}
+
+<h2>Departments</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", "Department", null, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Department Name</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            var index =1;
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@index</td>
+                    <td>@Html.DisplayFor(m => item.DepartmentName)</td>
+                    <td>
+                        @Html.ActionLink("Details", "Details", "Department", new { id = item.Id }, new { @class = "btn btn-sm btn-info" })
+                        @Html.ActionLink("Edit", "Edit", "Department", new { id = item.Id }, new { @class = "btn btn-sm btn-warning" })
+                        @Html.ActionLink("Delete", "Delete", "Department", new { id = item.Id }, new { @class = "btn btn-sm btn-danger" })
+                    </td>
+                </tr>
+                index++;
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3">No departments found.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

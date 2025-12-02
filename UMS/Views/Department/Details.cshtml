@@ -1,0 +1,26 @@
+﻿@model UMS.DTOs.DepartmentDTO
+
+@{
+    ViewBag.Title = "Department Details";
+}
+
+<h2>Department Details</h2>
+
+<div>
+    <h4>Department</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>ID</dt>
+        <dd>@Html.DisplayFor(m => m.Id)</dd>
+
+        <dt>Department Name</dt>
+        <dd>@Html.DisplayFor(m => m.DepartmentName)</dd>
+    </dl>
+</div>
+
+<p>
+    @Html.ActionLink("Edit", "Edit", "Department", new { id = Model?.Id }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Delete", "Delete", "Department", new { id = Model?.Id }, new { @class = "btn btn-danger" })
+    @Html.ActionLink("Back to List", "Index", "Department", null, new { @class = "btn btn-default" })
+</p>
+
